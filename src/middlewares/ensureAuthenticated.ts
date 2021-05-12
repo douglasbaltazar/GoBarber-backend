@@ -8,13 +8,15 @@ interface TokenPayload {
     sub: string;
 }
 
-interface Requestzim extends Request {
-    user: {
-        id: string;
+declare module 'express-serve-static-core' {
+    interface Request {
+        user: {
+            id: string;
+        }
     }
 }
 
-export default function ensureAuthenticated(request: Requestzim, response: Response, next: NextFunction): void {
+export default function ensureAuthenticated(request: Request, response: Response, next: NextFunction): void {
     const authHeader = request.headers.authorization;
 
     if(!authHeader) {
